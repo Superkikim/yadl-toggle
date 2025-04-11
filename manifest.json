@@ -11,6 +11,7 @@
     "96": "icons/system_96x96.png"
   },
   "browser_action": {
+    "default_popup": "popup.html",
     "browser_style": true,
     "default_icon": {
       "48": "icons/system_48x48.png",
@@ -19,18 +20,20 @@
     "default_title": "Toggle dark/light/system schemes"
   },
   "commands": {
-      "_execute_browser_action": {
-          "suggested_key": {
-              "default": "Ctrl+Shift+L"
-          }
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L"
       }
+    }
   },
   "permissions": [
     "storage",
     "browserSettings"
   ],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
   "options_ui": {
     "page": "/options.html",
