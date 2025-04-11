@@ -1,12 +1,12 @@
+// Added by GitHub user superkikim: notification popup after theme toggle.
+
 'use strict';
 
 const default_color_schemes = {
 	dark: true,
 	light: true,
-	system: false,
-	browser: false,
+	system: false
 }
-
 const color_schemes = [
 	"dark",
 	"light"
@@ -20,7 +20,7 @@ function detectDarkScheme() {
 
 function updatePrefs({ include }) {
 	const value = color_schemes[selected_scheme]
-	color_schemes.splice(0, color_schemes.length, ...Object.keys(default_color_schemes).filter(scheme => include[scheme]))
+	color_schemes.splice(0, color_schemes.length, ...Object.keys(include).filter(scheme => include[scheme]));
 	updateScheme({ value })
 }
 
@@ -46,9 +46,9 @@ function updateScheme({ value }) {
 		const basic = detectDarkScheme() ? "dark" : "light";
 		selected_scheme = color_schemes.indexOf(basic);
 	}
-	// the scheme is not in the list, and we want an inherited scheme, so take the other one
+	// the scheme is not in the list, fallback to 'system'
 	if (selected_scheme < 0) {
-		selected_scheme = color_schemes.indexOf(color_schemes.includes('browser') ? 'browser' : 'system');
+		selected_scheme = color_schemes.indexOf('system');
 	}
 	// this should never happen
 	if (selected_scheme < 0) {
@@ -62,15 +62,20 @@ function cycleScheme(tabId) {
 	browser.browserSettings.overrideContentColorScheme.set({ value: color_schemes[selected_scheme] });
 }
 
+// Set the color scheme
 Promise.all([
 	browser.storage.local.get({ include: default_color_schemes }).then(updatePrefs),
 	browser.browserSettings.overrideContentColorScheme.get({}).then(updateScheme),
 ]).then(() => {
 	browser.browserSettings.overrideContentColorScheme.onChange.addListener(updateScheme);
 	browser.runtime.onMessage.addListener(updatePrefs);
-	browser.browserAction.onClicked.addListener(cycleScheme);
 }).catch(console.error);
 
+
+
+
+
+// Set default color schemes on install
 browser.runtime.onInstalled.addListener(({ reason, temporary }) => {
 	if (reason === 'install') {
 		browser.storage.local.set({ include: default_color_schemes })
