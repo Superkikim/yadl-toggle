@@ -32,6 +32,7 @@ function cycleScheme() {
 
 function displayActiveMode() {
 	const current = modes[selected_scheme];
+
 	const label = color_schemes_labels[current] || current;
 
 	const li = document.createElement('li');
@@ -42,7 +43,6 @@ function displayActiveMode() {
 // Main logic
 browser.storage.local.get('include').then(({ include }) => {
 	modes = Object.keys(include).filter(scheme => include[scheme]);
-
 	browser.browserSettings.overrideContentColorScheme.get({}).then(({ value }) => {
 		updateSelectedScheme(value);
 		cycleScheme().then(() => {
@@ -52,7 +52,3 @@ browser.storage.local.get('include').then(({ include }) => {
 	});
 });
 
-// Close on mouse leave
-document.body.addEventListener('mouseleave', () => {
-	window.close();
-});
