@@ -25,36 +25,59 @@ function updatePrefs({ include }) {
 }
 
 function setBadge() {
-	browser.browserAction.setTitle({
-		title: `Change color scheme to ${color_schemes[(selected_scheme + 1) % color_schemes.length]}`
-	});
-	const is_dark = detectDarkScheme();
-	browser.browserAction.setIcon({
-		path: {
-			48: `icons/${color_schemes[selected_scheme]}_48x48.png`,
-			96: `icons/${color_schemes[selected_scheme]}_96x96.png`,
-		}
-	});
+    let nextScheme = (selected_scheme + 1) % color_schemes.length;
+    if (selected_scheme === -1) {
+        nextScheme = color_schemes.indexOf('dark');  // Cycle to 'dark' after 'system'
+    }
+
+    browser.browserAction.setTitle({
+        title: `Change color scheme to ${color_schemes[nextScheme]}`
+    });
+
+    let iconPath;
+    if (selected_scheme === -1) {
+        // Use the system icon
+        iconPath = {
+            48: "icons/system_48x48.png",
+            96: "icons/system_96x96.png",
+            128: "icons/system_128x128.png",
+            256: "icons/system_256x256.png"
+        };
+    } else {
+        // Use dark or light icon
+        iconPath = {
+            48: `icons/${color_schemes[selected_scheme]}_48x48.png`,
+            96: `icons/${color_schemes[selected_scheme]}_96x96.png`,
+            128: `icons/${color_schemes[selected_scheme]}_128x128.png`,
+            256: `icons/${color_schemes[selected_scheme]}_256x256.png`
+        };
+    }
+
+    browser.browserAction.setIcon({ path: iconPath });
 }
 
 function updateScheme({ value }) {
-	// determine a guess for where we are in the list and update the badge.
-	// if the value is in the list, EZ
-	selected_scheme = color_schemes.indexOf(value);
-	// fall back to the correct basic color scheme, as that’s all we can smartly detect
-	if (selected_scheme < 0) {
-		const basic = detectDarkScheme() ? "dark" : "light";
-		selected_scheme = color_schemes.indexOf(basic);
-	}
-	// the scheme is not in the list, fallback to 'system'
-	if (selected_scheme < 0) {
-		selected_scheme = color_schemes.indexOf('system');
-	}
-	// this should never happen
-	if (selected_scheme < 0) {
-		selected_scheme = 0;
-	}
-	setBadge();
+	if (value === "auto") value = "system";
+    // Check if the value is 'system' first
+	if (value === 'system') {
+        selected_scheme = -1;  // Use -1 to represent 'system'
+    } else {
+        // For 'dark' and 'light', find the index in color_schemes
+        selected_scheme = color_schemes.indexOf(value);
+        
+        // If not found, fallback to detecting the system theme
+        if (selected_scheme < 0) {
+            const basic = detectDarkScheme() ? "dark" : "light";
+            selected_scheme = color_schemes.indexOf(basic);
+        }
+    }
+
+    // Ensure we always have a valid selected_scheme
+    if (selected_scheme < 0 && value !== 'system') {
+        selected_scheme = 0;  // Default to the first scheme if all else fails
+    }
+
+    setBadge();
 }
 
 function cycleScheme(tabId) {
@@ -64,7 +87,7 @@ function cycleScheme(tabId) {
 
 // Set the color scheme
 Promise.all([
-	browser.storage.local.get({ include: default_color_schemes }).then(updatePrefs),
+//	browser.storage.local.get({ include: default_color_schemes }).then(updatePrefs),
 	browser.browserSettings.overrideContentColorScheme.get({}).then(updateScheme),
 ]).then(() => {
 	browser.browserSettings.overrideContentColorScheme.onChange.addListener(updateScheme);
