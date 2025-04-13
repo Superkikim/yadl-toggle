@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "YADL Toggle",
   "short_name": "yadl-toggle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Superkikim",
   "homepage_url": "https://github.com/superkikim/yadl-toggle",
   "description": "Yet Another Dark-Light Toggle — switch between dark, light, or system color schemes with one click.",

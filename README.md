@@ -35,7 +35,7 @@ An increasing number of websites now offer light and dark schemes, though you ma
 
 https://addons.mozilla.org/en-US/firefox/addon/yadl-toggle/
 
-## Credits
+## License and Credits
 
-Author: [Superkikim](https://github.com/Superkikim)  
-Based on [Cimbali](https://github.com/Cimbali) add-on [Toggle Dark Mode](https://github.com/Cimbali/toggle-dark-mode) 
+This project is licensed under the MIT License.  
+Based on [Toggle Dark Mode](https://github.com/Cimbali/toggle-dark-mode) by Cimbali, originally licensed under the WTFPL.
