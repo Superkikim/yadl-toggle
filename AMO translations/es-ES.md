@@ -1,11 +1,16 @@
 ### 🇪🇸 Español (es-ES)
 
-**Yet Another Dark-Light Toggle**
+**Dark Light System Toggle**
 
-Cambia entre el modo oscuro, claro o el esquema de color del sistema con un solo clic.  
+Cambia entre el modo oscuro, claro o el esquema de color del sistema con un solo clic — o usa Ctrl+Mayús+L.  
 El icono refleja el modo actual y una ventana emergente confirma brevemente la selección.
 
-**Para Firefox versión > 95**
+**Para Firefox versión ≥ 95**
+
+**¿Por qué este?**
+- **3 modos:** oscuro, claro y sistema (sigue la configuración de tu OS) — la mayoría de complementos similares solo ofrecen 2
+- **API nativa de Firefox** (`overrideContentColorScheme`) — sin inyección CSS, funciona de forma fiable en todos los sitios
+- **Cero permisos invasivos** — solo `storage` y `browserSettings`, nada más
 
 **⚠️ Nota importante**  
 Este complemento solo afecta a los sitios web que admiten tanto temas oscuros como claros utilizando tecnología web estándar.  
@@ -36,3 +41,6 @@ Cada vez más sitios ofrecen estos esquemas, aunque algunos como Google, GitHub 
 
 Este proyecto está bajo licencia MIT.  
 Basado en [Toggle Dark Mode](https://github.com/Cimbali/toggle-dark-mode) de Cimbali, originalmente licenciado bajo WTFPL.
+
+---
+*¿Te resulta útil? Deja una valoración ⭐ — ¡realmente ayuda!*

@@ -1,35 +1,38 @@
-![YADL Toggle](icons/system_96x96.png)
+![Dark Light System Toggle](icons/system_96x96.png)
 
-# Yet Another Dark-Light Toggle ! [![Mozilla Add-on](https://img.shields.io/amo/v/yadl-toggle)](https://addons.mozilla.org/en-US/firefox/addon/yadl-toggle/)
+# Dark Light System Toggle [![Mozilla Add-on](https://img.shields.io/amo/v/yadl-toggle)](https://addons.mozilla.org/en-US/firefox/addon/yadl-toggle/)
 
-**For Firefox version > 95.**
+**For Firefox version ≥ 95.**
 
 > **⚠️ Important Note**  
 > This add-on only affects websites that support both dark and light themes using standard web technology.  
-> If a website doesn’t support dark mode, this extension cannot make it dark.
+> If a website doesn't support dark mode, this extension cannot make it dark.
 >
-> Website designers may choose to implement both light and dark themes. If they don’t, this extension can’t compensate.  
-> There’s no reliable way to detect that in advance. If toggling has no effect, it simply means the site doesn’t support it.  
+> Website designers may choose to implement both light and dark themes. If they don't, this extension can't compensate.  
+> There's no reliable way to detect that in advance. If toggling has no effect, it simply means the site doesn't support it.  
 > **Please direct your frustration accordingly.**
 
-## Minimal add-on
+## Why this one?
 
-This is the simplest possible add-on with the least possible permissions.
+| | Dark Light System Toggle | Most alternatives |
+|---|:---:|:---:|
+| Dark mode | ✓ | ✓ |
+| Light mode | ✓ | ✓ |
+| **System mode** | **✓** | ✗ |
+| Native Firefox API (no CSS injection) | ✓ | ✗ |
+| Zero invasive permissions | ✓ | ✗ |
 
-Clicking the add-on icon in your toolbar cycles the color scheme preference _for browser content_, between the following values:
+- **3 modes** — dark, light, and system (inherits your OS setting). Most alternatives only offer 2.
+- **Native Firefox API** — uses `overrideContentColorScheme`, not CSS injection. Works reliably on all sites, no hacks.
+- **Zero invasive permissions** — only `storage` and `browserSettings`. No "access to all websites" required.
 
-1. **Dark mode** — forces dark colors
-2. **Light mode** — forces light colors
-3. **System mode** — inherits your OS setting
+## How it works
 
-You can enable or disable any of these values from the add-on settings.
+Clicking the toolbar icon (or pressing `Ctrl+Shift+L`) cycles through the enabled modes.  
+A small popup briefly confirms the new mode and closes after 1 second.  
+The toolbar icon updates to reflect the active scheme.
 
-A small popup briefly confirms the selected mode. It appears briefly after clicking and closes after 1 second.
-
-## Website support
-
-This add-on relies on the fact that websites have their own proper stylesheets for dark and light modes, for example [DuckDuckGo](https://duckduckgo.com/).  
-An increasing number of websites now offer light and dark schemes, though you may need to select a specific option to inherit your browser’s colors, e.g. Google, GitHub, StackOverflow, and many more.
+Modes available (configurable in options): **dark**, **light**, **system**.
 
 ## Development
 
@@ -70,7 +73,7 @@ Push a semver tag to trigger the CI pipeline:
 
 ```bash
 # After bumping version in manifest.json and committing
-git tag v1.1.0
+git tag v1.2.0
 git push --tags
 ```
 

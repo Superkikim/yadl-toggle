@@ -1,11 +1,16 @@
 ### 🇨🇳 中文（简体）(zh-CN)
 
-**Yet Another Dark-Light Toggle**
+**Dark Light System Toggle**
 
-只需点击一次，即可在深色、浅色或系统配色方案之间切换。  
+只需点击一次，即可在深色、浅色或系统配色方案之间切换 — 或使用 Ctrl+Shift+L。  
 图标反映当前模式，点击后会短暂显示一个弹窗确认所选设置。
 
 **适用于 Firefox 95 及以上版本**
+
+**为什么选择这个？**
+- **3 种模式：** 深色、浅色和系统（跟随 OS 设置）— 大多数同类扩展只提供 2 种
+- **Firefox 原生 API** (`overrideContentColorScheme`) — 无 CSS 注入，在所有网站上可靠运行
+- **零侵入性权限** — 仅需 `storage` 和 `browserSettings`，别无其他
 
 **⚠️ 重要提示**  
 此扩展仅对使用标准网页技术支持深色和浅色主题的网站生效。  
@@ -37,3 +42,6 @@
 
 本项目采用 MIT 许可证。  
 基于 Cimbali 的 [Toggle Dark Mode](https://github.com/Cimbali/toggle-dark-mode)，最初以 WTFPL 许可证发布。
+
+---
+*觉得有用？留下评分 ⭐ — 这真的很有帮助！*

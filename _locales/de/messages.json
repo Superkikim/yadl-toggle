@@ -1,0 +1,11 @@
+{
+  "extName":        { "message": "Dark Light System Toggle" },
+  "extShortName":   { "message": "Scheme Toggle" },
+  "extDescription": { "message": "Zwischen dunklem, hellem und System-Farbschema wechseln — Strg+Umschalt+L. Native Firefox-API. Keine invasiven Berechtigungen." },
+  "modeDark":       { "message": "Dunkelmodus" },
+  "modeLight":      { "message": "Hellmodus" },
+  "modeSystem":     { "message": "Systemmodus" },
+  "optionsTitle":   { "message": "Modi für den Zyklus auswählen:" },
+  "optionsError":   { "message": "Einstellungen nicht gespeichert: mindestens 2 Werte erforderlich." },
+  "reviewPrompt":   { "message": "Gefällt die Erweiterung? ⭐ Jetzt auf AMO bewerten" }
+}

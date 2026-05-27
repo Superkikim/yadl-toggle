@@ -1,0 +1,11 @@
+{
+  "extName":        { "message": "Dark Light System Toggle" },
+  "extShortName":   { "message": "Scheme Toggle" },
+  "extDescription": { "message": "Basculez entre les thèmes sombre, clair et système en un clic — Ctrl+Maj+L. API native de Firefox. Aucune permission invasive." },
+  "modeDark":       { "message": "Mode sombre" },
+  "modeLight":      { "message": "Mode clair" },
+  "modeSystem":     { "message": "Mode système" },
+  "optionsTitle":   { "message": "Choisissez les modes dans le cycle :" },
+  "optionsError":   { "message": "Paramètres non enregistrés : il faut au moins 2 valeurs pour le cycle." },
+  "reviewPrompt":   { "message": "Vous aimez cette extension ? ⭐ Notez-la sur AMO" }
+}

@@ -1,0 +1,11 @@
+{
+  "extName":        { "message": "Dark Light System Toggle" },
+  "extShortName":   { "message": "Scheme Toggle" },
+  "extDescription": { "message": "一键切换深色、浅色、系统配色 — Ctrl+Shift+L。使用 Firefox 原生 API，无侵入性权限。" },
+  "modeDark":       { "message": "深色模式" },
+  "modeLight":      { "message": "浅色模式" },
+  "modeSystem":     { "message": "系统模式" },
+  "optionsTitle":   { "message": "选择循环中包含的模式：" },
+  "optionsError":   { "message": "设置未保存：至少需要 2 个值。" },
+  "reviewPrompt":   { "message": "觉得不错？⭐ 在 AMO 上评分" }
+}

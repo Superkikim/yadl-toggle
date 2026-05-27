@@ -1,0 +1,11 @@
+{
+  "extName":        { "message": "Dark Light System Toggle" },
+  "extShortName":   { "message": "Scheme Toggle" },
+  "extDescription": { "message": "Alterna entre esquemas oscuro, claro y de sistema con un clic — Ctrl+Mayús+L. API nativa de Firefox. Sin permisos invasivos." },
+  "modeDark":       { "message": "Modo oscuro" },
+  "modeLight":      { "message": "Modo claro" },
+  "modeSystem":     { "message": "Modo sistema" },
+  "optionsTitle":   { "message": "Elige los modos del ciclo:" },
+  "optionsError":   { "message": "Ajustes no guardados: se necesitan al menos 2 valores." },
+  "reviewPrompt":   { "message": "¿Te gusta? ⭐ Valórala en AMO" }
+}

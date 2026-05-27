@@ -1,8 +1,8 @@
-# CLAUDE.md — YADL Toggle
+# CLAUDE.md — Dark Light System Toggle
 
 ## Project overview
 
-**YADL Toggle** (*Yet Another Dark-Light Toggle*) is a minimalist Firefox extension that cycles browser content color schemes between dark, light, and system modes with one click.
+**Dark Light System Toggle** is a minimalist Firefox extension that cycles browser content color schemes between dark, light, and system modes with one click. The AMO slug remains `yadl-toggle` (URL unchanged).
 
 - Published on [addons.mozilla.org](https://addons.mozilla.org/en-US/firefox/addon/yadl-toggle/)
 - Fork of [Toggle Dark Mode](https://github.com/Cimbali/toggle-dark-mode) by Cimbali (WTFPL) — substantially rewritten
@@ -125,8 +125,10 @@ done
 
 ## Roadmap / planned work
 
-- **Internationalisation (i18n)** — v1.2.0: use `browser.i18n` + `_locales/` to translate UI strings
-- **AMO listing** — add screenshots, boost discoverability
+- **Internationalisation (i18n)** — ✅ done in v1.2.0: `browser.i18n` + `_locales/` for 12 languages
+- **Renaming** — ✅ done in v1.2.0: "YADL Toggle" → "Dark Light System Toggle" (slug unchanged)
+- **Review prompt** — ✅ done in v1.2.0: one-time prompt after 10 activations
+- **AMO listing** — add screenshots, boost discoverability (manual action post-v1.2.0)
 - **Chrome port** — adapt manifest to MV3 for Chrome/Edge compatibility
 
 ## Git conventions

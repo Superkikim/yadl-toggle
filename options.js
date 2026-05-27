@@ -1,5 +1,12 @@
 'use strict';
 
+// Apply translated strings to all [data-i18n] elements.
+document.title = browser.i18n.getMessage('extName') || document.title;
+document.querySelectorAll('[data-i18n]').forEach(function(el) {
+	const msg = browser.i18n.getMessage(el.dataset.i18n);
+	if (msg) el.textContent = msg;
+});
+
 function update() {
 	const accumulator = (acc, checkbox) => Object.assign(acc, { [checkbox.name]: checkbox.checked });
 	const include = Array.from(document.getElementsByTagName('input')).reduce(accumulator, {});

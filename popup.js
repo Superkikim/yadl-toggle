@@ -8,9 +8,9 @@ let modes = [];
 let selected_scheme = -1;
 
 const color_schemes_labels = {
-	dark: "Dark mode",
-	light: "Light mode",
-	system: "System mode"
+	dark:   browser.i18n.getMessage('modeDark'),
+	light:  browser.i18n.getMessage('modeLight'),
+	system: browser.i18n.getMessage('modeSystem')
 };
 
 function updateSelectedScheme(value) {
@@ -40,20 +40,51 @@ function displayActiveMode() {
 	list.appendChild(li);
 }
 
-// Main logic: read prefs → get current scheme → cycle → display → close
+function displayReviewPrompt() {
+	const p = document.createElement('p');
+	p.className = 'review-prompt';
+	const a = document.createElement('a');
+	a.href = 'https://addons.mozilla.org/firefox/addon/yadl-toggle/reviews/';
+	a.target = '_blank';
+	a.rel = 'noopener noreferrer';
+	a.textContent = browser.i18n.getMessage('reviewPrompt');
+	p.appendChild(a);
+	document.body.appendChild(p);
+}
+
+// Main logic: read prefs → get current scheme → cycle → track → display → close
 const VALID_SCHEMES = ['dark', 'light', 'system'];
 
 browser.storage.local.get({ include: default_color_schemes })
-	.then(({ include }) => {
-		modes = Object.keys(include).filter(s => VALID_SCHEMES.includes(s) && include[s]);
+	.then(function(result) {
+		modes = Object.keys(result.include).filter(function(s) {
+			return VALID_SCHEMES.includes(s) && result.include[s];
+		});
 		return browser.browserSettings.overrideContentColorScheme.get({});
 	})
-	.then(({ value }) => {
-		updateSelectedScheme(value);
+	.then(function(result) {
+		updateSelectedScheme(result.value);
 		return cycleScheme();
 	})
-	.then(() => {
+	.then(function() {
+		return browser.storage.local.get({ useCount: 0, reviewPromptShown: false });
+	})
+	.then(function(result) {
+		const newCount = result.useCount + 1;
+		const showReview = newCount === 10 && !result.reviewPromptShown;
+		const updates = { useCount: newCount };
+		if (showReview) {
+			updates.reviewPromptShown = true;
+		}
+		return browser.storage.local.set(updates).then(function() {
+			return showReview;
+		});
+	})
+	.then(function(showReview) {
 		displayActiveMode();
-		setTimeout(() => window.close(), 1000);
+		if (showReview) {
+			displayReviewPrompt();
+		}
+		setTimeout(function() { window.close(); }, showReview ? 3000 : 1000);
 	})
 	.catch(console.error);

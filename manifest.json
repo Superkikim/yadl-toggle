@@ -1,11 +1,12 @@
 {
   "manifest_version": 2,
-  "name": "YADL Toggle",
-  "short_name": "yadl-toggle",
-  "version": "1.1.0",
+  "default_locale": "en",
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_extShortName__",
+  "version": "1.2.0",
   "author": "Superkikim",
   "homepage_url": "https://github.com/superkikim/yadl-toggle",
-  "description": "Yet Another Dark-Light Toggle — switch between dark, light, or system color schemes with one click.",
+  "description": "__MSG_extDescription__",
   "icons": {
     "48": "icons/yadl-toggle_48x48.png",
     "96": "icons/yadl-toggle_96x96.png",
@@ -20,7 +21,7 @@
       "128": "icons/system_128x128.png",
       "256": "icons/system_256x256.png"
     },
-    "default_title": "YADL Toggle"
+    "default_title": "__MSG_extName__"
   },
   "commands": {
     "_execute_browser_action": {

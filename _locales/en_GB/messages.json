@@ -1,0 +1,11 @@
+{
+  "extName":        { "message": "Dark Light System Toggle" },
+  "extShortName":   { "message": "Scheme Toggle" },
+  "extDescription": { "message": "Switch between dark, light, and system colour schemes with one click — Ctrl+Shift+L. Uses Firefox's native API. No invasive permissions." },
+  "modeDark":       { "message": "Dark mode" },
+  "modeLight":      { "message": "Light mode" },
+  "modeSystem":     { "message": "System mode" },
+  "optionsTitle":   { "message": "Choose which modes to cycle:" },
+  "optionsError":   { "message": "Settings not saved: at least 2 values are needed to cycle." },
+  "reviewPrompt":   { "message": "Enjoying this? ⭐ Rate it on AMO" }
+}

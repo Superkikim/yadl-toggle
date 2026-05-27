@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="Content-Security-Policy"
           content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline';" />
-    <title>Toggle light and dark content schemes</title>
+    <title>Dark Light System Toggle</title>
     <style>
       body {
         padding: 30px;
@@ -24,19 +24,19 @@
   </head>
 
   <body>
-    <p>Choose between which values to cycle:</p>
+    <p data-i18n="optionsTitle">Choose which modes to cycle:</p>
     <ul>
       <li>
-        <label><input type="checkbox" name="dark" aria-describedby="more-values-needed" />Dark mode</label>
+        <label><input type="checkbox" name="dark" aria-describedby="more-values-needed" /><span data-i18n="modeDark">Dark mode</span></label>
       </li>
       <li>
-        <label><input type="checkbox" name="light" aria-describedby="more-values-needed" />Light mode</label>
+        <label><input type="checkbox" name="light" aria-describedby="more-values-needed" /><span data-i18n="modeLight">Light mode</span></label>
       </li>
       <li>
-        <label><input type="checkbox" name="system" aria-describedby="more-values-needed" />System mode</label>
+        <label><input type="checkbox" name="system" aria-describedby="more-values-needed" /><span data-i18n="modeSystem">System mode</span></label>
       </li>
     </ul>
-    <p class="error" id="more-values-needed" aria-live="polite" style="display: none">
+    <p class="error" id="more-values-needed" aria-live="polite" style="display: none" data-i18n="optionsError">
       Settings not saved: at least 2 values are needed to cycle.
     </p>
 

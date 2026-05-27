@@ -1,0 +1,11 @@
+{
+  "extName":        { "message": "Dark Light System Toggle" },
+  "extShortName":   { "message": "Scheme Toggle" },
+  "extDescription": { "message": "تبديل بين الوضع الداكن والفاتح والنظام بنقرة — Ctrl+Shift+L. يستخدم API فايرفوكس الأصلي. بلا صلاحيات تطفلية." },
+  "modeDark":       { "message": "الوضع الداكن" },
+  "modeLight":      { "message": "الوضع الفاتح" },
+  "modeSystem":     { "message": "وضع النظام" },
+  "optionsTitle":   { "message": "اختر الأوضاع المضمنة في الدورة:" },
+  "optionsError":   { "message": "لم يتم حفظ الإعدادات: يلزم توفر قيمتين على الأقل." },
+  "reviewPrompt":   { "message": "هل تستمتع به؟ ⭐ قيّمه على AMO" }
+}

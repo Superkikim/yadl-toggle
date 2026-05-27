@@ -1,0 +1,11 @@
+{
+  "extName":        { "message": "Dark Light System Toggle" },
+  "extShortName":   { "message": "Scheme Toggle" },
+  "extDescription": { "message": "ワンクリックでダーク・ライト・システム配色を切り替え — Ctrl+Shift+L。Firefox 公式 API 使用。権限最小。" },
+  "modeDark":       { "message": "ダークモード" },
+  "modeLight":      { "message": "ライトモード" },
+  "modeSystem":     { "message": "システムモード" },
+  "optionsTitle":   { "message": "サイクルに含めるモードを選択：" },
+  "optionsError":   { "message": "設定が保存されませんでした：少なくとも 2 つの値が必要です。" },
+  "reviewPrompt":   { "message": "気に入りましたか？⭐ AMO で評価する" }
+}

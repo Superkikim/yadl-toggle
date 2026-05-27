@@ -1,0 +1,11 @@
+{
+  "extName":        { "message": "Dark Light System Toggle" },
+  "extShortName":   { "message": "Scheme Toggle" },
+  "extDescription": { "message": "Passa tra tema scuro, chiaro e sistema con un clic — Ctrl+Maiusc+L. API nativa di Firefox. Nessun permesso invasivo." },
+  "modeDark":       { "message": "Modalità scura" },
+  "modeLight":      { "message": "Modalità chiara" },
+  "modeSystem":     { "message": "Modalità sistema" },
+  "optionsTitle":   { "message": "Scegli le modalità del ciclo:" },
+  "optionsError":   { "message": "Impostazioni non salvate: sono necessari almeno 2 valori." },
+  "reviewPrompt":   { "message": "Ti piace? ⭐ Lascia una recensione su AMO" }
+}

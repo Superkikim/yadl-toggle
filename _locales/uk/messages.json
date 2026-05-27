@@ -1,0 +1,11 @@
+{
+  "extName":        { "message": "Dark Light System Toggle" },
+  "extShortName":   { "message": "Scheme Toggle" },
+  "extDescription": { "message": "Перемикайтесь між темною, світлою та системною схемою — Ctrl+Shift+L. Нативний API Firefox. Без нав'язливих дозволів." },
+  "modeDark":       { "message": "Темний режим" },
+  "modeLight":      { "message": "Світлий режим" },
+  "modeSystem":     { "message": "Системний режим" },
+  "optionsTitle":   { "message": "Оберіть режими для циклу:" },
+  "optionsError":   { "message": "Налаштування не збережено: потрібно не менше 2 значень." },
+  "reviewPrompt":   { "message": "Подобається? ⭐ Оцініть на AMO" }
+}
