@@ -12,7 +12,6 @@
 
 # Dev tooling — never ship
 node_modules/
-package-lock.json
 web-ext-artifacts/
 
 # Editor

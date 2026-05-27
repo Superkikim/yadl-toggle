@@ -38,7 +38,8 @@ An increasing number of websites now offer light and dark schemes, though you ma
 Node.js ≥ 18 (for dev tooling only — nothing ships in the extension).
 
 ```bash
-npm install        # Install ESLint + web-ext
+npm install                          # Install ESLint + web-ext
+git config core.hooksPath .githooks  # Enable pre-push lint hook (once per clone)
 ```
 
 ### Quality checks

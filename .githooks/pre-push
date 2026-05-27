@@ -1,0 +1,12 @@
+#!/bin/sh
+# Pre-push hook — runs lint:all before every push.
+# If any check fails, the push is aborted.
+
+echo "Running lint:all before push..."
+npm run lint:all
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "Push aborted: lint:all failed. Fix the errors above and try again."
+  exit 1
+fi
+echo "All checks passed."
