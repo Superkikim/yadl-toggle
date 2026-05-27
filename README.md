@@ -18,11 +18,11 @@ This is the simplest possible add-on with the least possible permissions.
 
 Clicking the add-on icon in your toolbar cycles the color scheme preference _for browser content_, between the following values:
 
-1. dark colors
-2. light colors
-3. inherit system colors (dark or light)
+1. **Dark mode** — forces dark colors
+2. **Light mode** — forces light colors
+3. **System mode** — inherits your OS setting
 
-You can enable or disable values in the cycle from the add-on content settings.
+You can enable or disable any of these values from the add-on settings.
 
 A small popup briefly confirms the selected mode. It appears briefly after clicking and closes after 1 second.
 
@@ -30,6 +30,50 @@ A small popup briefly confirms the selected mode. It appears briefly after click
 
 This add-on relies on the fact that websites have their own proper stylesheets for dark and light modes, for example [DuckDuckGo](https://duckduckgo.com/).  
 An increasing number of websites now offer light and dark schemes, though you may need to select a specific option to inherit your browser’s colors, e.g. Google, GitHub, StackOverflow, and many more.
+
+## Development
+
+### Prerequisites
+
+Node.js ≥ 18 (for dev tooling only — nothing ships in the extension).
+
+```bash
+npm install        # Install ESLint + web-ext
+```
+
+### Quality checks
+
+```bash
+npm run lint       # ESLint on JS source files
+npm run lint:ext   # web-ext manifest + packaging validation
+npm run lint:all   # Both — run before every commit
+```
+
+### Build
+
+```bash
+npm run build      # Creates web-ext-artifacts/yadl_toggle-x.y.z.zip
+```
+
+### Test locally
+
+1. Open Firefox → `about:debugging#/runtime/this-firefox`
+2. Click **"Load Temporary Add-on"**
+3. Select `manifest.json`
+
+The extension loads unsigned and disappears on browser restart.
+
+### Publishing to AMO
+
+Push a semver tag to trigger the CI pipeline:
+
+```bash
+# After bumping version in manifest.json and committing
+git tag v1.1.0
+git push --tags
+```
+
+The pipeline runs all lints, verifies the tag matches `manifest.json`, then waits for a manual approval before submitting to AMO. See `CLAUDE.md` for one-time GitHub setup.
 
 ## Links
 

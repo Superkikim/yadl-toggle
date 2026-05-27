@@ -1,0 +1,97 @@
+name: Build & Publish
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type PUBLISH to confirm manual release'
+        required: true
+        default: ''
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dev dependencies
+        run: npm ci
+
+      - name: Lint before build
+        run: npm run lint:all
+
+      - name: Read manifest version
+        id: version
+        run: |
+          VERSION=$(node -p "require('./manifest.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Verify tag matches manifest version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          MANIFEST="${{ steps.version.outputs.version }}"
+          if [ "$TAG" != "$MANIFEST" ]; then
+            echo "❌ Tag $TAG does not match manifest version $MANIFEST"
+            exit 1
+          fi
+          echo "✅ Tag $TAG matches manifest version $MANIFEST"
+
+      - name: Gate manual dispatch
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "PUBLISH" ]; then
+            echo "❌ Manual dispatch requires confirm=PUBLISH"
+            exit 1
+          fi
+          echo "✅ Manual dispatch confirmed"
+
+      - name: Build extension with web-ext
+        run: npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: yadl-toggle-${{ steps.version.outputs.version }}
+          path: web-ext-artifacts/*.zip
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: amo-production   # Configure in GitHub → Settings → Environments with a required reviewer
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dev dependencies
+        run: npm ci
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: yadl-toggle-${{ needs.build.outputs.version }}
+          path: web-ext-artifacts/
+
+      - name: Sign and submit to AMO
+        env:
+          WEB_EXT_API_KEY:    ${{ secrets.AMO_API_KEY }}
+          WEB_EXT_API_SECRET: ${{ secrets.AMO_API_SECRET }}
+        run: |
+          npx web-ext sign \
+            --api-key    "$WEB_EXT_API_KEY" \
+            --api-secret "$WEB_EXT_API_SECRET" \
+            --channel    listed

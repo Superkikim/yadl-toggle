@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline';" />
     <title>Toggle light and dark content schemes</title>
     <style>
       body {
@@ -25,25 +27,19 @@
     <p>Choose between which values to cycle:</p>
     <ul>
       <li>
-        <label><input type="checkbox" name="dark" />Forced <em>dark</em></label>
+        <label><input type="checkbox" name="dark" aria-describedby="more-values-needed" />Dark mode</label>
       </li>
       <li>
-        <label
-          ><input type="checkbox" name="light" />Forced
-          <em>light</em> scheme</label
-        >
+        <label><input type="checkbox" name="light" aria-describedby="more-values-needed" />Light mode</label>
       </li>
       <li>
-        <label
-          ><input type="checkbox" name="system" />Inherit
-          <em>system</em> scheme</label
-        >
+        <label><input type="checkbox" name="system" aria-describedby="more-values-needed" />System mode</label>
       </li>
     </ul>
-    <p class="error" id="more-values-needed" style="display: none">
+    <p class="error" id="more-values-needed" aria-live="polite" style="display: none">
       Settings not saved: at least 2 values are needed to cycle.
     </p>
 
-    <script type="text/javascript" src="/options.js"></script>
+    <script src="options.js"></script>
   </body>
 </html>

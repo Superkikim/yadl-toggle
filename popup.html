@@ -1,8 +1,10 @@
 <!-- popup.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline';" />
     <style>
       body {
         font-family: sans-serif;
@@ -16,11 +18,8 @@
       }
       li {
         padding: 6px 10px;
-        cursor: pointer;
+        cursor: default;
         border-radius: 4px;
-      }
-      li:hover {
-        background-color: #eee;
       }
       .selected::after {
         content: " ✓";
@@ -29,7 +28,8 @@
     </style>
   </head>
   <body>
-    <ul id="mode-list"></ul>
+    <ul id="mode-list" aria-live="polite"></ul>
+    <script src="utils.js"></script>
     <script src="popup.js"></script>
   </body>
 </html>

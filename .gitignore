@@ -10,6 +10,11 @@
 # Claude Code — local overrides only (settings.json is committed)
 .claude/settings.local.json
 
+# Dev tooling — never ship
+node_modules/
+package-lock.json
+web-ext-artifacts/
+
 # Editor
 .vscode/
 *.swp

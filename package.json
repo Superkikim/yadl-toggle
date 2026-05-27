@@ -1,0 +1,15 @@
+{
+  "name": "yadl-toggle",
+  "private": true,
+  "description": "Dev tooling for YADL Toggle Firefox extension",
+  "scripts": {
+    "lint":     "eslint background.js popup.js options.js utils.js",
+    "lint:ext": "web-ext lint",
+    "lint:all": "npm run lint && npm run lint:ext",
+    "build":    "web-ext build --overwrite-dest"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "web-ext": "^8.0.0"
+  }
+}

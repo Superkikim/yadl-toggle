@@ -27,6 +27,7 @@ These are intentional additions — don't revert them:
 
 ```
 manifest.json          Extension manifest (MV2)
+utils.js               Shared constants + detectDarkScheme() — loaded first in background + popup
 background.js          Core logic: scheme cycling, icon updates, storage sync
 popup.html / popup.js  Confirmation UI (auto-closes after 1 s)
 options.html / options.js  Settings page: which modes to include in the cycle
@@ -39,9 +40,10 @@ icons/                 PNG icons at 48 / 96 / 128 / 256 px
   yadl-toggle-dark.svg    Source SVG → dark PNGs
   yadl-toggle-icon.svg    Source SVG → system + app PNGs
 AMO translations/      Localised store descriptions (not loaded by the extension)
+.github/workflows/     CI/CD: lint on push, build+publish on version tag
 ```
 
-No build system. No npm. No transpilation. Plain JS that runs directly in the browser.
+No build system for the extension itself. Dev tooling (`eslint`, `web-ext`) is installed via npm as devDependencies — nothing ships in the extension package.
 
 ## Key APIs used
 
@@ -62,16 +64,40 @@ No build system. No npm. No transpilation. Plain JS that runs directly in the br
 
 The extension loads without signing. It disappears on browser restart.
 
-## Packaging for AMO
+## Tooling
+
+Dev dependencies are declared in `package.json` (devDependencies only — nothing ships in the extension).
 
 ```bash
-# From the repo root — include everything except build artefacts
-zip -r ../yadl-toggle.zip . --exclude "*.xpi" --exclude "*.zip" --exclude ".git/*" --exclude ".DS_Store"
+npm install        # Install ESLint + web-ext (first time)
+npm run lint       # ESLint on JS files
+npm run lint:ext   # web-ext lint (manifest + packaging validation)
+npm run lint:all   # Both checks combined — run before every commit
+npm run build      # Build .zip in web-ext-artifacts/ (replaces manual zip command)
 ```
 
-Then upload the `.zip` at https://addons.mozilla.org/en-US/developers/
+## Packaging for AMO
+
+Use `npm run build` to produce the `.zip` in `web-ext-artifacts/`. The CI pipeline runs `lint:all` automatically before building.
 
 The `.xpi` file in the repo is the Mozilla-signed artefact from the last submission. Do not edit it manually.
+
+## CI/CD — GitHub Actions
+
+Two workflows in `.github/workflows/`:
+
+- **`lint.yml`** — runs on every push to `master` / `dev-*` and on PRs to `master`. Runs `npm run lint` + `npm run lint:ext`.
+- **`publish.yml`** — triggered by a semver tag (`v1.2.0`) or manual dispatch. Gates:
+  1. All lints pass.
+  2. Tag version must match `manifest.json` `version` field.
+  3. Manual dispatch requires typing `PUBLISH` in the confirmation field.
+  4. The `publish` job requires approval from the `amo-production` GitHub Environment.
+
+**One-time setup for AMO publishing:**
+1. Create environment `amo-production` in GitHub → Settings → Environments, add required reviewer.
+2. Add secrets `AMO_API_KEY` and `AMO_API_SECRET` (from addons.mozilla.org → Tools → Manage API Keys).
+
+**Convention:** bump `manifest.json version`, commit, then `git tag v1.x.x && git push --tags` to trigger the pipeline.
 
 ## Icon generation
 
@@ -99,10 +125,8 @@ done
 
 ## Roadmap / planned work
 
-- **Visibility** — the extension icon doesn't reliably appear in the toolbar on first install; needs investigation
-- **Internationalisation (i18n)** — use `browser.i18n` + `_locales/` to translate UI strings
-- **Security & integrity** — review CSP, input handling, storage usage
-- **Polish** — improve options UI, add screenshots for AMO, boost discoverability
+- **Internationalisation (i18n)** — v1.2.0: use `browser.i18n` + `_locales/` to translate UI strings
+- **AMO listing** — add screenshots, boost discoverability
 - **Chrome port** — adapt manifest to MV3 for Chrome/Edge compatibility
 
 ## Git conventions
